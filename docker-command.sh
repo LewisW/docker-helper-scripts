@@ -4,9 +4,7 @@ WORKSPACE="$PWD"
 GIT_COMMIT="$BUILD_NUMBER"
 
 NET=
-OUTPUT_FILE=
 VOLUME=
-SHOULD_OUTPUT=0
 INTERACTIVE=
 
 while getopts "u:sd:b:" OPTION
@@ -17,7 +15,7 @@ do
              ;;
          s)
               echo "*** Starting Selenium";
-              selenium=`docker run --privileged --rm -p 5999:6999 -d lewisw/selenium
+              selenium=`docker run --privileged -p 5999:6999 -d lewisw/selenium`
               NET="--net container:$selenium"
              ;;
          d)
@@ -47,5 +45,6 @@ $command
 if [ -n "$selenium" ];
 then
      docker stop $selenium
+     docker rm -f $selenium
      echo "*** Stoping Selenium";
 fi
