@@ -11,12 +11,12 @@ chown -R teamcity:teamcity docker-helper-scripts
 chmod +x docker-helper-scripts/*.sh
 
 mkdir /home/teamcity/.ssh
-chown -R teamcity:teamcity /home/teamcity/.ssh
-chmod 0700 /home/teamcity/.ssh
 
 #touch /home/teamcity/.ssh/authorized_keys
 echo "ssh-rsa __KEY_HERE__" >> /home/teamcity/.ssh/authorized_keys
 
+chown -R teamcity:teamcity /home/teamcity/.ssh
+chmod 0700 /home/teamcity/.ssh
 chmod 0600 /home/teamcity/.ssh/authorized_keys
 
 sudo yum install unzip java-1.7.0-openjdk -y
