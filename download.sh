@@ -23,5 +23,6 @@ chmod 0700 /home/teamcity/.ssh
 chmod 0600 /home/teamcity/.ssh/authorized_keys
 
 curl https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+composer config -g github-oauth.github.com __YOUR_OAUTH_KEY__
 
 echo 'teamcity ALL = NOPASSWD: ALL' >> /etc/sudoers
