@@ -14,4 +14,4 @@ chown -R teamcity:teamcity /home/teamcity/.ssh
 chmod 0700 /home/teamcity/.ssh
 chmod 0600 /home/teamcity/.ssh/authorized_keys
 
-sudo yum install unzip -y
+sudo yum install unzip java-1.7.0-openjdk -y
