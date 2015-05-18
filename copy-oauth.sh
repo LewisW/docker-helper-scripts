@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [ "$USER" = "" ]; then export USER="$1"; fi
 
