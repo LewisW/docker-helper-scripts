@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 WORKSPACE="$PWD"
 GIT_COMMIT="$BUILD_NUMBER"
