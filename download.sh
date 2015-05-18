@@ -26,5 +26,6 @@ curl https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/
 composer config -g github-oauth.github.com __YOUR_OAUTH_KEY__
 
 echo 'ssh -f tunnel@__TUNNEL__ -L 8111:__APT_CACHER__:8111 -L 3142:__APT_CACHER__:3142 -N' >> /home/teamcity/.bashrc
+echo 'git pull' >> /home/teamcity/.bashrc
 echo '127.0.0.1 __APT_CACHER__' >> /etc/hosts
 echo 'teamcity ALL = NOPASSWD: ALL' >> /etc/sudoers
