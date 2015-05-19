@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+selenium=
 
 WORKSPACE="$PWD"
 GIT_COMMIT="$BUILD_NUMBER"
@@ -42,6 +42,7 @@ command="docker run $INTERACTIVE --rm --privileged $VOLUME -v $WORKSPACE/build/$
 
 echo "*** Running command: $command";
 $command
+e=$?
 
 if [ -n "$selenium" ];
 then
@@ -49,3 +50,5 @@ then
      docker rm -f $selenium
      echo "*** Stoping Selenium";
 fi
+
+exit $e
