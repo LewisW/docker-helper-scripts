@@ -1,6 +1,16 @@
 #!/bin/bash
 selenium=
 
+function finish {
+     if [ -n "$selenium" ];
+     then
+          docker stop $selenium
+          docker rm -f $selenium
+          echo "*** Stoping Selenium";
+     fi
+}
+trap finish EXIT
+
 WORKSPACE="$PWD"
 GIT_COMMIT="$BUILD_NUMBER"
 
@@ -42,13 +52,4 @@ command="docker run $INTERACTIVE --rm --privileged $VOLUME -v $WORKSPACE/build/$
 
 echo "*** Running command: $command";
 $command
-e=$?
-
-if [ -n "$selenium" ];
-then
-     docker stop $selenium
-     docker rm -f $selenium
-     echo "*** Stoping Selenium";
-fi
-
-exit $e
+exit $?
