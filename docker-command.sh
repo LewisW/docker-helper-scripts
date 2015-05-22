@@ -51,5 +51,4 @@ fi
 command="docker run $INTERACTIVE --rm --privileged $VOLUME -v $WORKSPACE/build/$LOG_DIR:/project/build/logs -v $WORKSPACE/build/$LOG_DIR:/project/app/logs $NET build-$GIT_COMMIT -- $@"
 
 echo "*** Running command: $command";
-$command
-exit $?
+exec $command
