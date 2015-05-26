@@ -16,9 +16,15 @@ sudo sh -c "find ./ | fgrep -v ./.git/ | xargs touch -t 200001010000.00"
 
 echo "** Building image **"
 # Build our image
-sudo docker build --rm -t $GIT_COMMIT .
+ID=$(sudo docker build --rm -t $GIT_COMMIT .)
 
 echo "*** Successfully built docker image $GIT_COMMIT ***"
+
+# Tag the image for the local repository
+docker tag $ID localhost:5000/$GIT_COMMIT
+docker push localhost:5000/$GIT_COMMIT
+
+echo "*** Pushing to local repository ***"
 
 mkdir -p build
 touch build/docker.built
