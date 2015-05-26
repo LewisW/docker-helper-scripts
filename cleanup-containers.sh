@@ -27,5 +27,5 @@ else
         # Delete old containers
         docker ps -a | grep 'months\|weeks\|days ago' | awk '{print $1}' | xargs -t --no-run-if-empty docker rm $FORCE
         # Delete old images
-        docker images | grep 'months\|weeks\|days ago' | awk '{print $3}' | xargs -t --no-run-if-empty docker rmi $FORCE
+        docker images | grep 'months\|weeks\|[0-9]\{2,\} days ago' | awk '{print $3}' | xargs -t --no-run-if-empty docker rmi $FORCE
 fi
