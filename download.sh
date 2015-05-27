@@ -11,7 +11,7 @@ gpasswd -a teamcity docker
 yum install unzip java-1.7.0-openjdk php php-cli git -y
 
 cd /home/teamcity
-git clone https://github.com/LewisW/docker-helper-scripts.git docker-helper-scripts
+git clone https://github.com/LewisW/docker-helper-scripts.git docker-scripts
 #curl -O -L https://github.com/LewisW/docker-helper-scripts/archive/0.1.tar.gz
 #tar -czf 0.1.tar.gz
 
