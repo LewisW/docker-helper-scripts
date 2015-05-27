@@ -15,8 +15,8 @@ git clone https://github.com/LewisW/docker-helper-scripts.git docker-scripts
 #curl -O -L https://github.com/LewisW/docker-helper-scripts/archive/0.1.tar.gz
 #tar -czf 0.1.tar.gz
 
-chown -R teamcity:teamcity docker-helper-scripts
-chmod +x docker-helper-scripts/*.sh
+chown -R teamcity:teamcity docker-scripts
+chmod +x docker-scripts/*.sh
 
 mkdir /home/teamcity/.ssh
 
