@@ -8,7 +8,7 @@ PUBLIC_KEY=
 useradd teamcity
 gpasswd -a teamcity docker
 
-yum install unzip java-1.7.0-openjdk php php-cli git -y
+yum install unzip java-1.7.0-openjdk php php-cli git jq -y
 
 cd /home/teamcity
 git clone https://github.com/LewisW/docker-helper-scripts.git docker-scripts
@@ -32,6 +32,8 @@ composer config -g github-oauth.github.com $OAUTH_KEY
 
 echo "ssh -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /home/teamcity/.bashrc
 echo "cd /home/teamcity/docker-scripts/ && git pull" >> /home/teamcity/.bashrc
+echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join("\n")' | xargs -I {} docker pull localhost:5000/build:{}"
+
 echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
 echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 
