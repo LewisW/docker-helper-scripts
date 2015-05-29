@@ -15,16 +15,18 @@ echo "** Resetting mtime **"
 sudo sh -c "find ./ | fgrep -v ./.git/ | xargs touch -t 200001010000.00"
 
 echo "** Building image **"
+
 # Build our image
-ID=$(sudo docker build --rm -t $GIT_COMMIT .)
+sudo docker build --rm -t $GIT_COMMIT .
 
 echo "*** Successfully built docker image $GIT_COMMIT ***"
 
 # Tag the image for the local repository
-docker tag $ID localhost:5000/$GIT_COMMIT
-docker push localhost:5000/$GIT_COMMIT
+sudo docker build -q --rm -t localhost:5000/$GIT_COMMIT . > /dev/null
 
 echo "*** Pushing to local repository ***"
+
+docker push localhost:5000/$GIT_COMMIT &
 
 mkdir -p build
 touch build/docker.built
