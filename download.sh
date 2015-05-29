@@ -8,7 +8,7 @@ PUBLIC_KEY=
 useradd teamcity
 gpasswd -a teamcity docker
 
-yum install unzip java-1.7.0-openjdk php php-cli git jq -y
+yum install unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 
 cd /home/teamcity
 git clone https://github.com/LewisW/docker-helper-scripts.git docker-scripts
