@@ -31,7 +31,7 @@ curl https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/
 composer config -g github-oauth.github.com $OAUTH_KEY
 
 echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
-echo "cd /home/teamcity/docker-scripts/ && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
+echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
 echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join("\n")' | xargs -I {} docker pull localhost:5000/build:{}" >> /etc/rc.local
 
 echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
