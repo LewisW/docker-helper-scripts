@@ -39,3 +39,6 @@ echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join("\n")' | xar
 
 echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
 echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
+
+#As teamcity
+docker pull localhost:5000/build
