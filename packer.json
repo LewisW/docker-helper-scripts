@@ -32,7 +32,7 @@
     {
       "type": "file",
       "source": "{{user `tunnel_key_path`}}",
-      "destination": "/etc/ssh/id_rsa"
+      "destination": "/tmp/id_rsa"
     },
     {
      "type": "shell",
