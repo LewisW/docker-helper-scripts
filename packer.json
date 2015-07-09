@@ -29,6 +29,14 @@
   "provisioners": [{
      "type": "shell",
      "script": "download.sh",
-     "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'"
+     "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
+     "environment_variables": [
+       "TUNNEL={{user `tunnel_server`}}",
+       "TUNNEL_KEY={{user `tunnel_key`}}",
+       "APT_CACHER={{user `apt_cacher_server`}}",
+       "DOCKER={{user `docker_server`}}",
+       "TEAMCITY={{user `teamcity_server`}}",
+       "OAUTH_KEY={{user `composer_oauth_key`}}",
+       "PUBLIC_KEY={{user `public_key`}}"
   }]
 }
