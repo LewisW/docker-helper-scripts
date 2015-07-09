@@ -1,7 +1,7 @@
 {
   "variables": {
     "tunnel_server": "",
-    "tunnel_key": "",
+    "tunnel_key_path": "",
     "apt_cacher_server": "",
     "teamcity_server": "",
     "docker_server": "",
@@ -10,8 +10,8 @@
     "aws_access_key": "",
     "aws_secret_key": "",
     "aws_account_id": "",
-    "aws_cert_key": "",
-    "aws_cert": ""
+    "aws_cert_path": "",
+    "aws_key_path": ""
   },
   "builders": [{
     "type": "amazon-instance",
@@ -24,11 +24,17 @@
     "ami_name": "Stig (packer) {{timestamp}}",
     "account_id": "{{user `aws_account_id`}}",
     "s3_bucket": "lewis-packer-images",
-    "x509_cert_path": "{{user `aws_cert`}}",
-    "x509_key_path": "{{user `aws_cert_key`}}",
+    "x509_cert_path": "{{user `aws_cert_path`}}",
+    "x509_key_path": "{{user `aws_key_path`}}",
     "x509_upload_path": "/tmp"
   }],
-  "provisioners": [{
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "{{user `tunnel_key_path`}}",
+      "destination": "/etc/ssh/id_rsa"
+    }
+    {
      "type": "shell",
      "script": "download.sh",
      "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
