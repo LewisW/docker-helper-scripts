@@ -1,5 +1,12 @@
 {
   "variables": {
+    "tunnel_server": "",
+    "tunnel_key": "",
+    "apt_cacher_server": "",
+    "teamcity_server": "",
+    "docker_server": "",
+    "composer_oauth_key": "",
+    "public_key": "",
     "aws_access_key": "",
     "aws_secret_key": ""
   },
