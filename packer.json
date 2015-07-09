@@ -18,7 +18,7 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "eu-west-1",
-    "source_ami": "ami-0921df7e",
+    "source_ami": "ami-cf0897b8",
     "instance_type": "m3.medium",
     "ssh_username": "ec2-user",
     "ami_name": "Stig (packer) {{timestamp}}",
@@ -29,10 +29,6 @@
     "x509_upload_path": "/tmp"
   }],
   "provisioners": [
-    {
-     "type": "shell",
-     "inline": ["sudo yum install openssh-clients -y"]
-    },
     {
       "type": "file",
       "source": "{{user `tunnel_key_path`}}",
