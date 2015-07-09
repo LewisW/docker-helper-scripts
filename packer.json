@@ -38,5 +38,6 @@
        "TEAMCITY={{user `teamcity_server`}}",
        "OAUTH_KEY={{user `composer_oauth_key`}}",
        "PUBLIC_KEY={{user `public_key`}}"
+      ]
   }]
 }
