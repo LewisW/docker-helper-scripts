@@ -31,7 +31,7 @@
   "provisioners": [
     {
      "type": "shell",
-     "inline": ["sudo yum install openssh-clients"]
+     "inline": ["sudo yum install openssh-clients -y"]
     },
     {
       "type": "file",
