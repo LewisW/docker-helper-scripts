@@ -11,7 +11,7 @@
     "aws_secret_key": "",
     "aws_account_id": "",
     "aws_cert_key": "",
-    "aws_cert": "",
+    "aws_cert": ""
   },
   "builders": [{
     "type": "amazon-instance",
