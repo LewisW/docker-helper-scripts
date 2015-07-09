@@ -50,4 +50,5 @@ echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
 echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 
 #As teamcity
+service docker start
 sudo -u teamcity docker pull localhost:5000/build
