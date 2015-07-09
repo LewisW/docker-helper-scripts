@@ -15,13 +15,13 @@ ssh-keyscan -H $TUNNEL > /etc/ssh/ssh_known_hosts
 yum update -y
 yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 
-cat <<EOT >/root/.bashrc
+cat <<EOT > /etc/bashrc
 export EC2_BASE=/opt/ec2
 export EC2_HOME=\$EC2_BASE/tools
 export PATH=\$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:\$EC2_HOME/bin
 EOT
  
-source /root/.bashrc
+source /etc/bashrc
 
 mkdir -p $EC2_HOME
 curl -o /tmp/ec2-api-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
