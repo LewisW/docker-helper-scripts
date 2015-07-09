@@ -39,6 +39,7 @@ sudo -u teamcity composer config -g github-oauth.github.com $OAUTH_KEY
 
 # Put tunnel private key in /etc/ssh/id_rsa
 #echo "$TUNNEL_KEY" > /etc/ssh/id_rsa
+mv /tmp/id_rsa /etc/ssh/id_rsa
 chmod 400 > /etc/ssh/id_rsa
 
 echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
