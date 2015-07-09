@@ -78,4 +78,7 @@ echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 #As teamcity
 service docker start
 
+echo $PATH
+whereis ec2-bundle-vol
+
 #/etc/rc.local
