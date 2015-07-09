@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #TUNNEL="{{user `tunnel_server`}}"
 #TUNNEL_KEY="{{user `tunnel_key`}}"
