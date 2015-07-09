@@ -17,13 +17,11 @@ yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 
 cat <<EOT >/root/.bashrc
 export EC2_BASE=/opt/ec2
-export EC2_HOME=$EC2_BASE/tools
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$EC2_HOME/bin
+export EC2_HOME=\$EC2_BASE/tools
+export PATH=\$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:\$EC2_HOME/bin
 EOT
  
 source /root/.bashrc
-
-echo $EC2_HOME
 
 mkdir -p $EC2_HOME
 curl -o /tmp/ec2-api-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
@@ -34,6 +32,10 @@ unzip /tmp/ec2-ami-tools.zip -d /tmp
 
 cp -r /tmp/ec2-api-tools-*/* $EC2_HOME
 cp -rf /tmp/ec2-ami-tools-*/* $EC2_HOME
+
+echo $EC2_HOME
+
+ls -al $EC2_HOME/bin
 
 useradd teamcity
 gpasswd -a teamcity docker
@@ -57,7 +59,7 @@ chown -R teamcity:teamcity /home/teamcity/.ssh
 chmod 0700 /home/teamcity/.ssh
 chmod 0600 /home/teamcity/.ssh/authorized_keys
 
-curl https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+curl https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 # Run as teamcity:
 sudo -u teamcity /usr/local/bin/composer config -g github-oauth.github.com $OAUTH_KEY
 
@@ -68,7 +70,7 @@ chmod 400 /etc/ssh/id_rsa
 
 echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
 echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
-echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join("\n")' | xargs -I {} docker pull localhost:5000/build:{}" >> /etc/rc.local
+echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{}" >> /etc/rc.local
 
 echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
 echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
