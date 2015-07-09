@@ -1,5 +1,7 @@
 #!/bin/bash -xe
 
+set -xe
+
 #TUNNEL="{{user `tunnel_server`}}"
 #TUNNEL_KEY="{{user `tunnel_key`}}"
 #APT_CACHER="{{user `apt_cacher_server`}}"
@@ -20,6 +22,8 @@ export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$
 EOT
  
 source /root/.bashrc
+
+echo $EC2_HOME
 
 mkdir -p $EC2_HOME
 curl -o /tmp/ec2-api-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
