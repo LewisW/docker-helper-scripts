@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -x -e
 
 #TUNNEL="{{user `tunnel_server`}}"
 #TUNNEL_KEY="{{user `tunnel_key`}}"
@@ -35,12 +35,12 @@ chmod 0600 /home/teamcity/.ssh/authorized_keys
 
 curl https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 # Run as teamcity:
-sudo -u teamcity composer config -g github-oauth.github.com $OAUTH_KEY
+sudo -u teamcity /usr/local/bin/composer config -g github-oauth.github.com $OAUTH_KEY
 
 # Put tunnel private key in /etc/ssh/id_rsa
 #echo "$TUNNEL_KEY" > /etc/ssh/id_rsa
 mv /tmp/id_rsa /etc/ssh/id_rsa
-chmod 400 > /etc/ssh/id_rsa
+chmod 400 /etc/ssh/id_rsa
 
 echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
 echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
@@ -50,4 +50,4 @@ echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
 echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 
 #As teamcity
-docker pull localhost:5000/build
+sudo -u teamcity docker pull localhost:5000/build
