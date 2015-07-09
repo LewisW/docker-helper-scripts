@@ -13,24 +13,23 @@ ssh-keyscan -H $TUNNEL > /etc/ssh/ssh_known_hosts
 yum update -y
 yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 
-mkdir -p /opt/EC2TOOLS
-curl -o /tmp/ec2-api-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
-curl -o /tmp/ec2-ami-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools.zip
-
-cd /tmp
-
-unzip /tmp/ec2-api-tools.zip
-unzip /tmp/ec2-ami-tools.zip
-
-cp -r /tmp/ec2-api-tools-*/* /opt/EC2TOOLS
-cp -r /tmp/ec2-ami-tools-*/* /opt/EC2TOOLS
-
 cat <<EOT >/root/.bashrc
-export PATH=\$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/EC2TOOLS/bin
-export EC2_HOME=/opt/EC2TOOLS
+export EC2_BASE=/opt/ec2
+export EC2_HOME=$EC2_BASE/tools
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$EC2_HOME/bin
 EOT
  
 source /root/.bashrc
+
+mkdir -p $EC2_HOME
+curl -o /tmp/ec2-api-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
+curl -o /tmp/ec2-ami-tools.zip http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools.zip
+
+unzip /tmp/ec2-api-tools.zip -d /tmp
+unzip /tmp/ec2-ami-tools.zip -d /tmp
+
+cp -r /tmp/ec2-api-tools-*/* $EC2_HOME
+cp -rf /tmp/ec2-ami-tools-*/* $EC2_HOME
 
 useradd teamcity
 gpasswd -a teamcity docker
