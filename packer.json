@@ -9,7 +9,9 @@
     "public_key": "",
     "aws_access_key": "",
     "aws_secret_key": "",
-    "aws_account_id": ""
+    "aws_account_id": "",
+    "aws_cert_key": "",
+    "aws_cert": "",
   },
   "builders": [{
     "type": "amazon-instance",
@@ -22,8 +24,8 @@
     "ami_name": "Stig (packer) {{timestamp}}",
     "account_id": "{{user `aws_account_id`}}",
     "s3_bucket": "lewis-packer-images",
-    "x509_cert_path": "x509.cert",
-    "x509_key_path": "x509.key",
+    "x509_cert_path": "{{user `aws_cert`}}",
+    "x509_key_path": "{{user `aws_cert_key`}}",
     "x509_upload_path": "/tmp"
   }],
   "provisioners": [{
