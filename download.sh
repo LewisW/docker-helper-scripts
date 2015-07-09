@@ -51,4 +51,5 @@ echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 
 #As teamcity
 service docker start
-sudo -u teamcity docker pull localhost:5000/build
+
+/etc/rc.local
