@@ -25,8 +25,7 @@
     "account_id": "{{user `aws_account_id`}}",
     "s3_bucket": "lewis-packer-images",
     "x509_cert_path": "{{user `aws_cert_path`}}",
-    "x509_key_path": "{{user `aws_key_path`}}",
-    "x509_upload_path": "/tmp"
+    "x509_key_path": "{{user `aws_key_path`}}"
   }],
   "provisioners": [
     {
