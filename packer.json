@@ -8,7 +8,8 @@
     "composer_oauth_key": "",
     "public_key": "",
     "aws_access_key": "",
-    "aws_secret_key": ""
+    "aws_secret_key": "",
+    "aws_account_id": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -18,7 +19,12 @@
     "source_ami": "ami-0921df7e",
     "instance_type": "m3.medium",
     "ssh_username": "ec2-user",
-    "ami_name": "Stig (packer)"
+    "ami_name": "Stig (packer) {{timestamp}}",
+    "account_id": "{{user `aws_account_id`}}",
+    "s3_bucket": "lewis-packer-images",
+    "x509_cert_path": "x509.cert",
+    "x509_key_path": "x509.key",
+    "x509_upload_path": "/tmp",
   }],
   "provisioners": [{
      "type": "shell",
