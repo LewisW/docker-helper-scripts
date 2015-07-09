@@ -8,11 +8,11 @@
 #OAUTH_KEY="{{user `composer_oauth_key`}}"
 #PUBLIC_KEY="{{user `public_key`}}"
 
+yum update -y
+yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
+
 useradd teamcity
 gpasswd -a teamcity docker
-
-yum update
-yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 
 chkconfig docker on
 
