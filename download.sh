@@ -8,7 +8,7 @@
 #OAUTH_KEY="{{user `composer_oauth_key`}}"
 #PUBLIC_KEY="{{user `public_key`}}"
 
-ssh-keyscan $TUNNEL >> /etc/ssh/known_hosts
+ssh-keyscan -H $TUNNEL > /etc/ssh/ssh_known_hosts
 
 yum update -y
 yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
