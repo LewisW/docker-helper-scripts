@@ -78,4 +78,4 @@ echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 #As teamcity
 service docker start
 
-/etc/rc.local
+#/etc/rc.local
