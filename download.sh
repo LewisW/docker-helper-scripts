@@ -1,12 +1,12 @@
 #!/bin/bash
 
-TUNNEL="{{user `tunnel_server`}}"
-TUNNEL_KEY="{{user `tunnel_key`}}"
-APT_CACHER="{{user `apt_cacher_server`}}"
-DOCKER="{{user `docker_server`}}"
-TEAMCITY="{{user `teamcity_server`}}"
-OAUTH_KEY="{{user `composer_oauth_key`}}"
-PUBLIC_KEY="{{user `public_key`}}"
+#TUNNEL="{{user `tunnel_server`}}"
+#TUNNEL_KEY="{{user `tunnel_key`}}"
+#APT_CACHER="{{user `apt_cacher_server`}}"
+#DOCKER="{{user `docker_server`}}"
+#TEAMCITY="{{user `teamcity_server`}}"
+#OAUTH_KEY="{{user `composer_oauth_key`}}"
+#PUBLIC_KEY="{{user `public_key`}}"
 
 useradd teamcity
 gpasswd -a teamcity docker
