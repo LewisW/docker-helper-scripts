@@ -25,7 +25,9 @@
     "account_id": "{{user `aws_account_id`}}",
     "s3_bucket": "lewis-packer-images",
     "x509_cert_path": "{{user `aws_cert_path`}}",
-    "x509_key_path": "{{user `aws_key_path`}}"
+    "x509_key_path": "{{user `aws_key_path`}}",
+    "bundle_vol_command": "sudo -n EC2_HOME=/opt/ec2/tools/ ec2-bundle-vol --no-filter -k {{.KeyPath}} -u {{.AccountId}} -c {{.CertPath}} -r {{.Architecture}} -e {{.PrivatePath}}/* -d {{.Destination}} -p {{.Prefix}} --batch",
+    "bundle_upload_command": "sudo -n EC2_HOME=/opt/ec2/tools/ ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{.AccessKey}} -s {{.SecretKey}} -d {{.BundleDirectory}} --batch --location EU --retry"
   }],
   "provisioners": [
     {
