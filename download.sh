@@ -80,7 +80,6 @@ sudo sed -i -r 's/Defaults\s+(requiretty|!visiblepw)/#\0/' /etc/sudoers
 #As teamcity
 service docker start
 
-echo $PATH
-whereis ec2-bundle-vol
-
-#/etc/rc.local
+# Predownload the images
+sudo -u teamcity docker pull lewisw/selenium:latest
+/etc/rc.local
