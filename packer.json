@@ -28,7 +28,8 @@
     "x509_key_path": "{{user `aws_key_path`}}",
     "ami_virtualization_type": "hvm",
     "bundle_vol_command": "sudo -n -i EC2_HOME=/opt/ec2/tools/ /opt/ec2/tools/bin/ec2-bundle-vol --no-filter -k {{.KeyPath}} -u {{.AccountId}} -c {{.CertPath}} -r {{.Architecture}} -e {{.PrivatePath}}/* -d {{.Destination}} -p {{.Prefix}} --batch",
-    "bundle_upload_command": "sudo -n -i EC2_HOME=/opt/ec2/tools/ /opt/ec2/tools/bin/ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{.AccessKey}} -s {{.SecretKey}} -d {{.BundleDirectory}} --batch --region {{.Region}} --retry"
+    "bundle_upload_command": "sudo -n -i EC2_HOME=/opt/ec2/tools/ /opt/ec2/tools/bin/ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{.AccessKey}} -s {{.SecretKey}} -d {{.BundleDirectory}} --batch --region {{.Region}} --retry",
+    "tags": { "name": "Stig" }
   }],
   "provisioners": [
     {
