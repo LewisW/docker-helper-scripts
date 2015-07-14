@@ -73,7 +73,7 @@ mv /tmp/id_rsa /etc/ssh/id_rsa
 chmod 400 /etc/ssh/id_rsa
 
 # Create the LVM drives
-echo "/usr/local/bin/docker-direct-lvm /dev/xvdb" >> /etc/rc.local
+#echo "/usr/local/bin/docker-direct-lvm /dev/xvdb" >> /etc/rc.local
 echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
 
 # Tunnel to our office server
