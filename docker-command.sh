@@ -48,7 +48,7 @@ then
         INTERACTIVE=' -it'
 fi
 
-command="docker run $INTERACTIVE --rm --privileged $VOLUME -v $WORKSPACE/build/$LOG_DIR:/project/build/logs -v $WORKSPACE/build/$LOG_DIR:/project/app/logs $NET localhost:5000/$GIT_COMMIT -- $@"
+command="docker run $INTERACTIVE --rm --privileged $VOLUME -v $WORKSPACE/build/$LOG_DIR:/project/build/logs -v $WORKSPACE/build/$LOG_DIR:/project/app/logs $NET $GIT_COMMIT -- $@"
 
 echo "*** Running command: $command";
 $command
