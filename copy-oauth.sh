@@ -13,5 +13,5 @@ if [ "$HOME" = "" ]; then export HOME="`getent passwd $USER | cut -f6 -d:`"; fi
 composer config -g github-oauth.github.com > github-oauth.token
 
 # Reset the modified time so docker doesn't invalidate the cache between different servers
-touch -t 200001010000.00" github-oauth.token
+touch -t 200001010000.00 github-oauth.token
 
