@@ -31,8 +31,10 @@
     "bundle_upload_command": "sudo -n -i EC2_HOME=/opt/ec2/tools/ /opt/ec2/tools/bin/ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{.AccessKey}} -s {{.SecretKey}} -d {{.BundleDirectory}} --batch --region {{.Region}} --retry",
     "tags": { "name": "Stig" },
     "ami_block_device_mappings": [
-      "device_name": "xvdh",
-      "virtual_name": "ephemeral0"
+      {
+        "device_name": "xvdh",
+        "virtual_name": "ephemeral0"
+      }
     ]
   }],
   "provisioners": [
