@@ -19,7 +19,7 @@
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "eu-west-1",
     "source_ami": "ami-cf0897b8",
-    "instance_type": "m3.medium",
+    "instance_type": "m3.large",
     "ssh_username": "ec2-user",
     "ami_name": "Stig (packer) {{timestamp}}",
     "account_id": "{{user `aws_account_id`}}",
