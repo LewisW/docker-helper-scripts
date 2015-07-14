@@ -16,9 +16,8 @@ yum update -y
 yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 
 # Format the drive for direct-lvm devicemapper
-curl -O https://gist.githubusercontent.com/ambakshi/ddebac9148b4aea36446/raw/3954d97f367c05d41ae70791767afb74f65360d0/docker-direct-lvm.sh
-chmod +x docker-direct-lvm.sh
-./docker-direct-lvm.sh /dev/xvdb
+sudo curl -O /usr/local/bin/docker-direct-lvm https://gist.githubusercontent.com/ambakshi/ddebac9148b4aea36446/raw/3954d97f367c05d41ae70791767afb74f65360d0/docker-direct-lvm.sh
+chmod +x /usr/local/bin/docker-direct-lvm
 
 # Configure docker for the direct-lvm
 #echo "--storage-opt dm.datadev=/dev/direct-lvm/data --storage-opt dm.metadatadev=/dev/direct-lvm/metadata" > /etc/sysconfig/docker
@@ -41,12 +40,9 @@ unzip /tmp/ec2-ami-tools.zip -d /tmp
 cp -r /tmp/ec2-api-tools-*/* $EC2_HOME
 cp -rf /tmp/ec2-ami-tools-*/* $EC2_HOME
 
-echo $EC2_HOME
-
-ls -al $EC2_HOME/bin
-
 useradd teamcity
 gpasswd -a teamcity docker
+echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 
 chkconfig docker on
 
@@ -76,17 +72,22 @@ sudo -u teamcity /usr/local/bin/composer config -g github-oauth.github.com $OAUT
 mv /tmp/id_rsa /etc/ssh/id_rsa
 chmod 400 /etc/ssh/id_rsa
 
-echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
-echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
-echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{} || true" >> /etc/rc.local
-
+# Create the LVM drives
+echo "/usr/local/bin/docker-direct-lvm /dev/xvdb" >> /etc/rc.local
 echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
-echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
+
+# Tunnel to our office server
+echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
+# Self update the helper scripts
+echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
+
+# Pre-download the basic images
+echo "docker pull lewisw/selenium:latest" >> /etc/rc.local
+echo "docker pull lewisw/docker-test-runner" >> /etc/rc.local
+
+# Download the latest tags for each product
+echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{} || true" >> /etc/rc.local
 
 sudo sed -i -r 's/Defaults\s+(requiretty|!visiblepw)/#\0/' /etc/sudoers
 
-# Predownload the images
-sudo -u teamcity docker pull lewisw/selenium:latest
-sudo -u teamcity docker pull lewisw/docker-test-runner
-
-#/etc/rc.local
+df -h
