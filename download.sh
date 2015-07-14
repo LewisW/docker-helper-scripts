@@ -85,9 +85,6 @@ echo "teamcity ALL = NOPASSWD: ALL" >> /etc/sudoers
 
 sudo sed -i -r 's/Defaults\s+(requiretty|!visiblepw)/#\0/' /etc/sudoers
 
-#As teamcity
-service docker start
-
 # Predownload the images
 sudo -u teamcity docker pull lewisw/selenium:latest
 sudo -u teamcity docker pull lewisw/docker-test-runner
