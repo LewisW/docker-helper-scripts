@@ -82,4 +82,6 @@ service docker start
 
 # Predownload the images
 sudo -u teamcity docker pull lewisw/selenium:latest
+sudo -u teamcity docker pull lewisw/docker-test-runner
+
 /etc/rc.local
