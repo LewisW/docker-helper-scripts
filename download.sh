@@ -21,6 +21,8 @@ chmod +x /usr/local/bin/docker-direct-lvm
 
 # Remove /var/lib/docker so we can create the drive later
 rm -fr /var/lib/docker
+# Remove the mount from fstab
+sudo sed -i 's/\/dev\/xvdb/#\/dev\/xvdb/' /etc/fstab 
 
 # Configure docker for the direct-lvm
 #echo "--storage-opt dm.datadev=/dev/direct-lvm/data --storage-opt dm.metadatadev=/dev/direct-lvm/metadata" > /etc/sysconfig/docker
