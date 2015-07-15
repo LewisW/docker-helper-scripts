@@ -62,6 +62,7 @@ mkdir /home/teamcity/.ssh
 
 #touch /home/teamcity/.ssh/authorized_keys
 echo "ssh-rsa $PUBLIC_KEY" >> /home/teamcity/.ssh/authorized_keys
+echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
 
 chown -R teamcity:teamcity /home/teamcity/.ssh
 chmod 0700 /home/teamcity/.ssh
@@ -77,8 +78,8 @@ mv /tmp/id_rsa /etc/ssh/id_rsa
 chmod 400 /etc/ssh/id_rsa
 
 # Create the LVM drives
-#echo "/usr/local/bin/docker-direct-lvm /dev/xvdb" >> /etc/rc.local
-echo "127.0.0.1 $APT_CACHER $TEAMCITY $DOCKER" >> /etc/hosts
+echo "umount /dev/xvdb" >> /etc/rc.local
+echo "/usr/local/bin/docker-direct-lvm /dev/xvdb" >> /etc/rc.local
 
 # Tunnel to our office server
 echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
@@ -86,14 +87,14 @@ echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$T
 echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
 
 # Pre-download the basic images
-#echo "docker pull lewisw/selenium:latest" >> /etc/rc.local
+echo "docker pull lewisw/selenium:latest" >> /etc/rc.local
 #echo "docker pull lewisw/docker-test-runner" >> /etc/rc.local
 
 # Download the latest tags for each product
-#echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{} || true" >> /etc/rc.local
+echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{} || true" >> /etc/rc.local
 
 sudo sed -i -r 's/Defaults\s+(requiretty|!visiblepw)/#\0/' /etc/sudoers
 
-sudo cat /etc/fstab
 lsblk
 df -h
+sudo cat /etc/fstab
