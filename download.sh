@@ -19,6 +19,9 @@ yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 sudo curl -o /usr/local/bin/docker-direct-lvm https://gist.githubusercontent.com/ambakshi/ddebac9148b4aea36446/raw/3954d97f367c05d41ae70791767afb74f65360d0/docker-direct-lvm.sh
 chmod +x /usr/local/bin/docker-direct-lvm
 
+# Remove /var/lib/docker so we can create the drive later
+rm -fr /var/lib/docker
+
 # Configure docker for the direct-lvm
 #echo "--storage-opt dm.datadev=/dev/direct-lvm/data --storage-opt dm.metadatadev=/dev/direct-lvm/metadata" > /etc/sysconfig/docker
 
@@ -48,8 +51,6 @@ chkconfig docker on
 
 cd /home/teamcity
 git clone https://github.com/LewisW/docker-helper-scripts.git docker-scripts
-#curl -O -L https://github.com/LewisW/docker-helper-scripts/archive/0.1.tar.gz
-#tar -czf 0.1.tar.gz
 
 chown -R teamcity:teamcity docker-scripts
 chmod +x docker-scripts/*.sh
@@ -82,12 +83,13 @@ echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$T
 echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
 
 # Pre-download the basic images
-echo "docker pull lewisw/selenium:latest" >> /etc/rc.local
-echo "docker pull lewisw/docker-test-runner" >> /etc/rc.local
+#echo "docker pull lewisw/selenium:latest" >> /etc/rc.local
+#echo "docker pull lewisw/docker-test-runner" >> /etc/rc.local
 
 # Download the latest tags for each product
-echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{} || true" >> /etc/rc.local
+#echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{} || true" >> /etc/rc.local
 
 sudo sed -i -r 's/Defaults\s+(requiretty|!visiblepw)/#\0/' /etc/sudoers
 
+lsblk
 df -h
