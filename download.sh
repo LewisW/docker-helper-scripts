@@ -88,7 +88,7 @@ echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && 
 
 # Pre-download the basic images
 echo "docker pull lewisw/selenium:latest" >> /etc/rc.local
-#echo "docker pull lewisw/docker-test-runner" >> /etc/rc.local
+echo "docker pull lewisw/docker-test-runner" >> /etc/rc.local
 
 # Download the latest tags for each product
 echo "curl localhost:5000/v2/build/tags/list  | jq -r '.tags | join(\"\\n\")' | xargs -I {} docker pull localhost:5000/build:{} || true" >> /etc/rc.local
