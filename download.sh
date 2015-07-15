@@ -23,6 +23,7 @@ chmod +x /usr/local/bin/docker-direct-lvm
 rm -fr /var/lib/docker
 # Remove the mount from fstab
 sudo sed -i 's/\/dev\/xvdb/#\/dev\/xvdb/' /etc/fstab 
+sudo umount /dev/xvdb
 
 # Configure docker for the direct-lvm
 #echo "--storage-opt dm.datadev=/dev/direct-lvm/data --storage-opt dm.metadatadev=/dev/direct-lvm/metadata" > /etc/sysconfig/docker
@@ -93,5 +94,6 @@ echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && 
 
 sudo sed -i -r 's/Defaults\s+(requiretty|!visiblepw)/#\0/' /etc/sudoers
 
+sudo cat /etc/fstab
 lsblk
 df -h
