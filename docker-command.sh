@@ -26,7 +26,7 @@ do
              ;;
          s)
               echo "*** Starting Selenium";
-              selenium=`docker run --privileged -P -d lewisw/selenium`
+              selenium=`docker run --privileged -P -d lewisw/selenium-stable`
               NET="--net container:$selenium"
              ;;
          d)
