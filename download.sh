@@ -87,7 +87,7 @@ echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$T
 echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
 
 # Pre-download the basic images
-echo "docker pull lewisw/selenium:latest" >> /etc/rc.local
+echo "docker pull lewisw/selenium-stable:latest" >> /etc/rc.local
 #echo "docker pull lewisw/docker-test-runner" >> /etc/rc.local
 
 # Download the latest tags for each product
