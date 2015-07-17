@@ -20,10 +20,6 @@ echo "** Building image **"
 sudo docker build --rm -t $GIT_COMMIT .
 
 echo "*** Successfully built docker image $GIT_COMMIT ***"
-
-# Tag the image for the local repository
-#sudo docker build -q --rm -t localhost:5000/$GIT_COMMIT . > /dev/null
-
 echo "*** Pushing to local repository ***"
 
 docker push $GIT_COMMIT &
