@@ -12,7 +12,7 @@ done
 
 echo "** Resetting mtime **" 
 # Reset the mtime to force Docker's cache to ignore checkout time
-sudo sh -c "find ./ | fgrep -v ./.git/ | xargs touch -t 200001010000.00"
+sudo sh -c "find ./ | xargs touch -t 200001010000.00"
 
 echo "** Building image **"
 
