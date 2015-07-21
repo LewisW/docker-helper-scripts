@@ -18,7 +18,7 @@ NET=
 VOLUME=
 INTERACTIVE=
 
-while getopts "u:sd:b:" OPTION
+while getopts "u:sSd:b:" OPTION
 do
      case $OPTION in
          u)
@@ -27,6 +27,11 @@ do
          s)
               echo "*** Starting Selenium";
               selenium=`docker run --privileged -P -d lewisw/selenium-stable`
+              NET="--net container:$selenium"
+             ;;
+         S)
+              echo "*** Starting Sauce Connect";
+              selenium=`docker run -d lewisw/docker-sauce-connect $SAUCE_USERNAME $SAUCE_ACCESS_KEY`
               NET="--net container:$selenium"
              ;;
          d)
