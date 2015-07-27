@@ -11,6 +11,7 @@ set -xe
 #PUBLIC_KEY="{{user `public_key`}}"
 
 ssh-keyscan -H $TUNNEL > /etc/ssh/ssh_known_hosts
+echo "ServerAliveInterval 180" >> /etc/ssh/ssh_config
 
 yum update -y
 yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
