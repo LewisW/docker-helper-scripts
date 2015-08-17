@@ -14,7 +14,9 @@ ssh-keyscan -H $TUNNEL > /etc/ssh/ssh_known_hosts
 echo "ServerAliveInterval 180" >> /etc/ssh/ssh_config
 
 yum update -y
-yum install docker unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
+yum install unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
+
+curl -sSL https://get.docker.com/ | sh
 
 # Format the drive for direct-lvm devicemapper
 sudo curl -o /usr/local/bin/docker-direct-lvm https://gist.githubusercontent.com/ambakshi/ddebac9148b4aea36446/raw/3954d97f367c05d41ae70791767afb74f65360d0/docker-direct-lvm.sh
