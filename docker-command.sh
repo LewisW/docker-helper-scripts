@@ -54,10 +54,10 @@ do
 done
 
 # No selenium? Skip startup files
-if [ "$selenium" == "" ];
-then
-     BOOTOPTS="$BOOTOPTS --skip-startup-files"
-fi
+#if [ "$selenium" == "" ];
+#then
+#     BOOTOPTS="$BOOTOPTS --skip-startup-files"
+#fi
 
 # Shift all processed options away
 shift $((OPTIND-1))
