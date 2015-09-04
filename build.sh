@@ -22,7 +22,7 @@ sudo docker build --rm -t $GIT_COMMIT .
 echo "*** Successfully built docker image $GIT_COMMIT ***"
 echo "*** Pushing to local repository ***"
 
-docker push $GIT_COMMIT
+(setsid docker push $GIT_COMMIT &)
 
 mkdir -p build
 touch build/docker.built
