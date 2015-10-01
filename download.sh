@@ -79,6 +79,7 @@ sudo -u teamcity /usr/local/bin/composer config -g github-oauth.github.com $OAUT
 #echo "$TUNNEL_KEY" > /etc/ssh/id_rsa
 mv /tmp/id_rsa /etc/ssh/id_rsa
 chmod 400 /etc/ssh/id_rsa
+chown teamcity:teamcity /etc/ssh/id_rsa
 
 # Create the LVM drives
 echo "umount /dev/xvdb" >> /etc/rc.local
