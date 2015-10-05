@@ -19,7 +19,7 @@ yum install unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
 curl -sSL https://get.docker.com/ | sh
 
 # Format the drive for direct-lvm devicemapper
-sudo curl -o /usr/local/bin/docker-direct-lvm https://gist.githubusercontent.com/LewisW/75f1f0bee9858384ad1c/raw/87e236b4cd2598be8bcaa930de62d77c271292d1/docker-direct-lvm.sh
+sudo curl -o /usr/local/bin/docker-direct-lvm https://gist.githubusercontent.com/LewisW/75f1f0bee9858384ad1c/raw/1779ad27113b2c72251d1451252b159d589168d8/docker-direct-lvm.sh
 chmod +x /usr/local/bin/docker-direct-lvm
 
 # Remove /var/lib/docker so we can create the drive later
