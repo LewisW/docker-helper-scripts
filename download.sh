@@ -28,6 +28,8 @@ rm -fr /var/lib/docker
 sudo sed -i 's/\/dev\/xvdb/#\/dev\/xvdb/' /etc/fstab 
 sudo umount /dev/xvdb
 
+echo 'OPTIONS="$OPTIONS --storage-driver=devicemapper"' >> /etc/sysconfig/docker
+
 # Configure docker for the direct-lvm
 #echo "--storage-opt dm.datadev=/dev/direct-lvm/data --storage-opt dm.metadatadev=/dev/direct-lvm/metadata" > /etc/sysconfig/docker
 
