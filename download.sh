@@ -13,8 +13,8 @@ set -xe
 ssh-keyscan -H $TUNNEL > /etc/ssh/ssh_known_hosts
 echo "ServerAliveInterval 180" >> /etc/ssh/ssh_config
 
-yum update -y
-yum install unzip java-1.7.0-openjdk php php-cli git jq nc.x86_64 -y
+apt-get update -y
+apt-get install unzip openjdk-7-jdk php5 php5-cli git jq -y
 
 curl -sSL https://get.docker.com/ | sh
 
