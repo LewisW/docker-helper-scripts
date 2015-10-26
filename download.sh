@@ -94,7 +94,7 @@ echo "umount /dev/xvdb" >> /etc/rc.local
 echo "/usr/local/bin/docker-direct-lvm /dev/xvdb" >> /etc/rc.local
 
 # Tunnel to our office server
-echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 5000:$TEAMCITY:5000 -L 9000:$TEAMCITY:9000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
+echo "ssh -i /etc/ssh/id_rsa -f tunnel@$TUNNEL -L 8111:$TEAMCITY:8111 -L 8443:$TEAMCITY:8443 -L 5000:$TEAMCITY:5000 -L 9000:$TEAMCITY:9000 -L 3142:$APT_CACHER:3142 -N" >> /etc/rc.local
 # Self update the helper scripts
 echo "cd /home/teamcity/docker-scripts/ && git reset --hard HEAD && git pull && chown -R teamcity:teamcity . && chmod +x ./*.sh" >> /etc/rc.local
 
