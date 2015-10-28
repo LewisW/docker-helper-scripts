@@ -62,14 +62,16 @@ done
 # Shift all processed options away
 shift $((OPTIND-1))
 
-LOG_DIR=$(basename $0)
-
 if [ -t 1 ];
 then
         INTERACTIVE=' -it'
 fi
 
-command="docker run $INTERACTIVE --rm --privileged $VOLUME -v $WORKSPACE/build/$LOG_DIR:/project/build/logs -v $WORKSPACE/build/$LOG_DIR:/project/app/logs $NET $GIT_COMMIT $BOOTOPTS -- $@"
+command="docker run $INTERACTIVE --rm \
+--privileged $VOLUME \
+-v $WORKSPACE/logs/build:/project/build/logs \
+-v $WORKSPACE/logs/app/:/project/app/logs \
+$NET $GIT_COMMIT $BOOTOPTS -- $@"
 
 echo "*** Running command: $command";
 $command
