@@ -67,6 +67,9 @@ then
         INTERACTIVE=' -it'
 fi
 
+mkdir -p $WORKSPACE/logs/build
+mkdir -p $WORKSPACE/logs/app
+
 command="docker run $INTERACTIVE --rm \
 --privileged $VOLUME \
 -v $WORKSPACE/logs/build:/project/build/logs \
