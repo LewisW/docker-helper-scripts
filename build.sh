@@ -17,7 +17,7 @@ sudo sh -c "find -L ./ -exec touch -t 200001010000.00 '{}' \;"
 echo "** Building image **"
 
 # Build our image
-sudo docker build --rm -t $GIT_COMMIT .
+sudo docker build -t $GIT_COMMIT .
 
 echo "*** Successfully built docker image $GIT_COMMIT ***"
 echo "*** Pushing to local repository ***"
