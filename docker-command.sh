@@ -70,10 +70,11 @@ fi
 mkdir -p $WORKSPACE/logs/build
 mkdir -p $WORKSPACE/logs/app
 
-command="docker run $INTERACTIVE --rm \
+command="docker run $INTERACTIVE \
 --privileged $VOLUME \
 -v $WORKSPACE/logs/build:/project/build/logs \
 -v $WORKSPACE/logs/app/:/project/app/logs \
+-v $WORKSPACE/app/cache:/project/app/cache \
 $NET $GIT_COMMIT $BOOTOPTS -- $@"
 
 echo "*** Running command: $command";
