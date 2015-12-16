@@ -26,7 +26,7 @@ else
         docker ps -a | grep 'selenium-stable' | awk '{print $1 }' | xargs -t --no-run-if-empty docker stop $FORCE
         
         # Delete stopped containers
-        docker ps -a | grep 'build:' | grep Exited | awk '{print $1 }' | xargs -t --no-run-if-empty docker rm $FORCE
+        docker ps -a | grep Exited | awk '{print $1 }' | xargs -t --no-run-if-empty docker rm $FORCE
         # Delete old containers
         docker ps -a | grep 'build:' | grep 'months\|weeks\|days ago' | awk '{print $1}' | xargs -t --no-run-if-empty docker rm $FORCE
         # Delete old images
