@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-CUR_DIR=dirname "$0"
+CUR_DIR=`dirname "$0"`
 
 if [ -f "$CUR_DIR/github-oauth.token" ]; then
         cp "$CUR_DIR/github-oauth.token" github-oauth.token
