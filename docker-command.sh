@@ -72,7 +72,6 @@ mkdir -p $WORKSPACE/logs/app
 
 command="docker run $INTERACTIVE \
 --privileged $VOLUME \
--e NO_SHARED_DIRS=1 \
 -e MYSQL_RAM_SIZE=256 \
 -v $WORKSPACE/logs/build:/project/build/logs \
 -v $WORKSPACE/logs/app/:/project/app/logs \
