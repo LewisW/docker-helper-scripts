@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Cleanup old images
+docker images | grep ':5000/build' | grep 'months\|weeks\|days\|hours ago' | xargs -t --no-run-if-empty docker rmi
+
 while getopts "b:" OPTION
 do
      case $OPTION in
