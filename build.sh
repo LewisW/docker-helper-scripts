@@ -2,7 +2,7 @@
 set -e
 
 # Cleanup old images
-docker images | grep ':5000/build' | grep 'months\|weeks\|days\|hours ago' | awk '{print $3}' | xargs -t --no-run-if-empty docker rmi
+docker images | grep ':5000/build' | grep 'months\|weeks\|days\|hours ago' | awk '{print $3}' | xargs -t --no-run-if-empty docker rmi || true
 
 while getopts "b:" OPTION
 do
